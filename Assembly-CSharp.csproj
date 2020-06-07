@@ -66,6 +66,7 @@
     <Compile Include="Assets\Resources\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Enemy.cs" />
     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Turret.cs" />
     <Reference Include="UnityEngine">
       <HintPath>E:/Unity Editors/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
