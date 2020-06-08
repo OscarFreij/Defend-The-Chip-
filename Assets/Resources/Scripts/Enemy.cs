@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public Transform Target { get; private set; }
     public float Speed { get; set; }
     public float TimeAlive { get; private set; }
+    public float Health { get; private set; }
 
     public float PathLength { get; private set; }
     public float PathLengthTraveled { get; private set; }
@@ -23,7 +24,7 @@ public class Enemy : MonoBehaviour
     {
         try
         {
-            this.PathLength = Convert.ToInt32(Path.gameObject.name.Substring(Path.gameObject.name.IndexOf(':')+1));
+            this.PathLength = Convert.ToInt32(Path.transform.parent.gameObject.name.Substring(Path.transform.parent.gameObject.name.IndexOf(':')+1));
             this.PathLengthTraveled = 0;
             this.PathProgress = 0;
             this.TimeAlive = 0;
@@ -37,8 +38,9 @@ public class Enemy : MonoBehaviour
 
             this.HasBeenInitiated = true;
         }
-        catch
+        catch(Exception e)
         {
+            Debug.LogError(e.ToString());
             return false;
         }
         return true;
