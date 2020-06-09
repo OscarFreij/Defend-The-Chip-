@@ -17,7 +17,7 @@ public class Laser : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
 
-        Initialize(2);
+        
 
 
     }

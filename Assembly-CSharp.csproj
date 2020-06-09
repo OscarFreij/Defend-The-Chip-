@@ -69,6 +69,7 @@
     <Compile Include="Assets\Resources\Scripts\Enemy.cs" />
     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
     <Compile Include="Assets\Resources\Scripts\HealthBarTilt.cs" />
+    <Compile Include="Assets\Resources\Scripts\PrePlacementScript.cs" />
     <Compile Include="Assets\Resources\Scripts\Turret.cs" />
     <Compile Include="Assets\Resources\Scripts\Turrets\Electric\Arcgun.cs" />
     <Compile Include="Assets\Resources\Scripts\Turrets\Electric\TeslaCoil.cs" />

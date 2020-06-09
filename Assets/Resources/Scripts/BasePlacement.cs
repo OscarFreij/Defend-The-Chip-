@@ -36,10 +36,11 @@ public class BasePlacement : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-                transform.LookAt(hit.point + new Vector3(0, 1, 0));
+                transform.LookAt(hit.point + new Vector3(0, transform.localScale.y / 2, 0));
             }
             else if (Input.GetMouseButtonUp(0) && this.PlacementAllowed)
             {
+                this.gameObject.name = "BuildPlate";
                 Destroy(this);
             }
             else
@@ -47,9 +48,9 @@ public class BasePlacement : MonoBehaviour
                 if (hit.transform.tag == "Board")
                 {
                     Vector3 clickedPosition = hit.point;
-                    transform.position = Vector3.Lerp(startPoint, clickedPosition + new Vector3(0, 1, 0), (Time.time - startTime) / 1.0f);
-                    //transform.position = clickedPosition + new Vector3(0, 1, 0);
-                    
+                    //transform.position = Vector3.Lerp(startPoint, clickedPosition + new Vector3(0, transform.localScale.y / 2, 0), (Time.time - startTime) / 1.0f);
+                    transform.position = clickedPosition + new Vector3(0, transform.localScale.y / 2, 0);
+
                 }
             }
 

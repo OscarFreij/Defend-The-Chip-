@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public float PathLength { get; private set; }
     public float PathLengthTraveled { get; private set; }
     public float PathProgress { get; private set; }
+    public float GroundClerance { get; private set; }
 
     public GameObject Path { get; private set; }
     public int PathItemNr { get; private set; }
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
     {
         try
         {
+            this.GroundClerance = 0;
             this.MaxHealth = MaxHealth;
             this.Health = this.MaxHealth;
             this.PathLength = Convert.ToInt32(Path.transform.parent.gameObject.name.Substring(Path.transform.parent.gameObject.name.IndexOf(':')+1));
@@ -34,7 +36,7 @@ public class Enemy : MonoBehaviour
             this.TimeAlive = 0;
             this.Speed = Speed;
             this.Path = Path;
-            this.transform.position = this.Path.transform.Find("start").transform.position;
+            this.transform.position = this.Path.transform.Find("start").transform.position + new Vector3(0, GroundClerance, 0);
             this.PathItemNr = 0;
             this.Target = this.Path.transform.Find(this.PathItemNr.ToString()).transform;
             //Debug.Log("Number of waypoints: " + this.Path.transform.childCount);
@@ -64,7 +66,7 @@ public class Enemy : MonoBehaviour
 
             this.transform.Find("Canvas").transform.Find("BarFG").transform.GetComponent<Image>().fillAmount = this.Health / this.MaxHealth;
             this.TimeAlive += Time.deltaTime;
-            if (this.Target.position == this.transform.position)
+            if ((this.Target.position + new Vector3(0, GroundClerance, 0) == this.transform.position))
             {
                 if (this.Target.name == "finish")
                 {
@@ -90,7 +92,7 @@ public class Enemy : MonoBehaviour
             {
                 float step = Speed * Time.deltaTime;
                 this.PathLengthTraveled += step;
-                this.transform.position = Vector3.MoveTowards(this.transform.position, Target.position, step);
+                this.transform.position = Vector3.MoveTowards(this.transform.position, Target.position + new Vector3(0, GroundClerance, 0), step);
                 this.PathProgress = (float)(Math.Round(this.PathLengthTraveled / this.PathLength, 3) * 100);
                 
                 if (this.PathProgress > 100)

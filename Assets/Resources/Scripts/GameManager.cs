@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject EnemyList { get; private set; }
     public float SpawnTimer { get; private set; }
     public float TimeSinceLastSpawn { get; private set; }
+    public bool BuildMode = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +78,41 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            this.BuildMode = !this.BuildMode;
+        }
+
+
+        if (this.BuildMode)
+        {
+            GameObject.Find("Canvas").transform.Find("Menu").gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.Find("ModeDisplay").transform.Find("Value").GetComponent<Text>().text = "Build";
+
+
+        }
+        else
+        {
+
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = GameObject.Find("Main Camera").gameObject.GetComponent<Camera>().ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+                    if (hit.transform.tag == "BuildPlate" || hit.transform.tag == "PlacedObject")
+                    {
+                        Destroy(hit.transform.gameObject);
+                    }
+
+                }
+            }
+
+            GameObject.Find("Canvas").transform.Find("ModeDisplay").transform.Find("Value").GetComponent<Text>().text = "Sell";
+            GameObject.Find("Canvas").transform.Find("Menu").gameObject.SetActive(false);
+        }
+
         this.TimeSinceLastSpawn += Time.deltaTime;
         if (this.TimeSinceLastSpawn >= this.SpawnTimer)
         {
@@ -117,8 +154,17 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    public void SpawnTurretBase()
+    public void SpawnBuildBase()
     {
         Instantiate(Resources.Load("Prefabs/TurretBase_Template"),new Vector3(0,0,0), Quaternion.identity);
+    }
+
+    public void BuildBaseAddon(int AddonId)
+    {
+
+        GameObject NewAddon = Instantiate(Resources.Load("Prefabs/PrePlacementObject"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+
+        NewAddon.transform.GetComponent<PrePlacementScript>().AddonID = AddonId;
+
     }
 }
