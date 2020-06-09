@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 
         GameObject NewEnemy = Instantiate(Resources.Load("Prefabs/Enemy"), new Vector3(0,0,0), Quaternion.identity) as GameObject;
 
-        if (NewEnemy.GetComponent<Enemy>().Init(Path.transform.Find("Waypoints").gameObject, 10.0f))
+        if (NewEnemy.GetComponent<Enemy>().Init(Path.transform.Find("Waypoints").gameObject, 10.0f, 100.0f))
         {
             NewEnemy.transform.parent = this.EnemyList.transform;
             //Debug.Log("Enemy initialized!");
@@ -115,5 +115,10 @@ public class GameManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void SpawnTurretBase()
+    {
+        Instantiate(Resources.Load("Prefabs/TurretBase_Template"),new Vector3(0,0,0), Quaternion.identity);
     }
 }

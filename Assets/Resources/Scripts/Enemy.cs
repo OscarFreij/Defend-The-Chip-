@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float Speed { get; set; }
     public float TimeAlive { get; private set; }
     public float Health { get; private set; }
+    public float MaxHealth { get; private set; }
 
     public float PathLength { get; private set; }
     public float PathLengthTraveled { get; private set; }
@@ -20,10 +22,12 @@ public class Enemy : MonoBehaviour
     public bool PathIsSelected { get; private set; }
     public bool HasBeenInitiated;
 
-    public bool Init(GameObject Path, float Speed)
+    public bool Init(GameObject Path, float Speed, float MaxHealth)
     {
         try
         {
+            this.MaxHealth = MaxHealth;
+            this.Health = this.MaxHealth;
             this.PathLength = Convert.ToInt32(Path.transform.parent.gameObject.name.Substring(Path.transform.parent.gameObject.name.IndexOf(':')+1));
             this.PathLengthTraveled = 0;
             this.PathProgress = 0;
@@ -52,6 +56,13 @@ public class Enemy : MonoBehaviour
     {
         if (this.HasBeenInitiated)
         {
+
+            if (this.Health <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+
+            this.transform.Find("Canvas").transform.Find("BarFG").transform.GetComponent<Image>().fillAmount = this.Health / this.MaxHealth;
             this.TimeAlive += Time.deltaTime;
             if (this.Target.position == this.transform.position)
             {
@@ -94,5 +105,10 @@ public class Enemy : MonoBehaviour
         {
             //Debug.Log("Enemy waiting to be initiated!");
         }
+    }
+
+    public void Damage(float DamageAmount)
+    {
+        this.Health -= DamageAmount;
     }
 }

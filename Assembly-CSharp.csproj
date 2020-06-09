@@ -64,10 +64,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Resources\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\BasePlacement.cs" />
+    <Compile Include="Assets\Resources\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Resources\Scripts\Enemy.cs" />
     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\RayCastMovement.cs" />
+    <Compile Include="Assets\Resources\Scripts\HealthBarTilt.cs" />
     <Compile Include="Assets\Resources\Scripts\Turret.cs" />
+    <Compile Include="Assets\Resources\Scripts\Turrets\Electric\Arcgun.cs" />
+    <Compile Include="Assets\Resources\Scripts\Turrets\Electric\TeslaCoil.cs" />
+    <Compile Include="Assets\Resources\Scripts\Turrets\Gun\Coilgun.cs" />
+    <Compile Include="Assets\Resources\Scripts\Turrets\Gun\Railgun.cs" />
+    <Compile Include="Assets\Resources\Scripts\Turrets\Laser\Laser.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\GU\PowerOutlet.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\GU\RepairBot.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\PTU\ECS.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\PTU\GroundZero.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\TU\Damage.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\TU\Movement.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\TU\PowerEfficiency.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\TU\Range.cs" />
+    <Compile Include="Assets\Resources\Scripts\Upgrades\TU\Speed.cs" />
     <Reference Include="UnityEngine">
       <HintPath>E:/Unity Editors/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
